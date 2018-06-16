@@ -2,15 +2,15 @@ import React from 'react';
 import {StyleSheet, css} from 'aphrodite'; 
 import './App.css';
 
-const Header = () =>{
+const Header = ({name}) =>{
     return(
-        <h1 id = "Header" className = {css(styles.header)}>BENEFOOD</h1>
+        <h1 id = "Header" className = {css(styles.header)}>BENEFOOD{name}</h1>
     );
 }
 
 const styles = StyleSheet.create({
     header: {
-        backgroundColor: "rgba(155,15,110,.7)",
+        backgroundColor: "rgba(155,155,155,.7)",
         color: "red",
         fontSize: "5.5rem",
         margin: '10px',

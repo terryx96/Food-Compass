@@ -23,11 +23,11 @@ class Sidebar extends Component {
 const styles = StyleSheet.create({
     sideBar: {
         backgroundColor: 'rgba(33,77,100,.9)',
-        height: '100vh',
+        height: '105%',
         width: '10rem',
         position: 'absolute',
         size: 'auto',
-        left: '-150px',
+        left: '-120px',
         alignContent: 'left',
         color: 'white',
         borderTopRightRadius: '10px',
@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     p: {
         textDecoration: 'underline',
         fontSize: '20px',
+        marginLeft:'1rem',
     }
 
 

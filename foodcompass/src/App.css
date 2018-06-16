@@ -45,7 +45,11 @@ body {
 }
 
 #Header {
-  -webkit-text-stroke: 1px black;
+  -webkit-text-stroke: 1px rgba(0,0,0,0.5);
+}
+
+#terry {
+  background-image: url('images/terry.jpg');
 }
 
 
