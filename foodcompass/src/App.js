@@ -13,7 +13,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header name = {this.state.pageName}/>
         <Sidebar getPage = {this.getPage} />
         <Main page = {this.state.page} />
       </div>
@@ -23,6 +23,7 @@ class App extends Component {
   getPage = (page) => {
     this.setState({page})
   }
+
 
   
 }

@@ -44,12 +44,12 @@ body {
   background-color: grey;
 }
 
-#AboutUs{
-  background-image: url('images/formBackground.jpg'); 
+#Header {
+  -webkit-text-stroke: 1px rgba(0,0,0,0.5);
 }
 
-#Header {
-  -webkit-text-stroke: 1px black;
+#terry {
+  background-image: url('images/terry.jpg');
 }
 
 

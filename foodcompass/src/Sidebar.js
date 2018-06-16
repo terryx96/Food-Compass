@@ -4,11 +4,13 @@ import {StyleSheet, css} from 'aphrodite';
 class Sidebar extends Component {
     render(){
         return(
-            <div className = {css(styles.sideBar)}> <p className = {css(styles.p)}>Food Compass</p>
+            <div className = {css(styles.sideBar)}> <p className = {css(styles.p)}>BeneFood</p>
                 <button onClick = {this.handleClick} value = "0" className = {css(styles.div)}>Home</button>
                 <br/><button onClick = {this.handleClick} value = "1" className = {css(styles.div)}>About us</button>
                 <br/><button onClick = {this.handleClick} value = "2" className = {css(styles.div)}>Eligibility</button>
                 <br/><button onClick = {this.handleClick} value = "3" className = {css(styles.div)}>Nearby Aid</button>
+                <br/><button onClick = {this.handleClick} value = "4" className = {css(styles.div)}>Terms</button>
+
             </div>
         );
     }
@@ -21,11 +23,11 @@ class Sidebar extends Component {
 const styles = StyleSheet.create({
     sideBar: {
         backgroundColor: 'rgba(33,77,100,.9)',
-        height: '200vh',
+        height: '105%',
         width: '10rem',
         position: 'absolute',
         size: 'auto',
-        left: '-150px',
+        left: '-120px',
         alignContent: 'left',
         color: 'white',
         borderTopRightRadius: '10px',
@@ -60,6 +62,7 @@ const styles = StyleSheet.create({
     p: {
         textDecoration: 'underline',
         fontSize: '20px',
+        marginLeft:'1rem',
     }
 
 
