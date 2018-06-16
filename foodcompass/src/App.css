@@ -37,5 +37,9 @@ body {
   background-image: url('images/formBackground.jpg'); 
 }
 
+#Header {
+  -webkit-text-stroke: 1px black;
+}
+
 
 

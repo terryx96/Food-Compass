@@ -1,16 +1,17 @@
 import React from 'react';
 import {StyleSheet, css} from 'aphrodite'; 
+import './App.css';
 
 const Header = () =>{
     return(
-        <h1 className = {css(styles.header)}>FOOD COMPASS</h1>
+        <h1 id = "Header" className = {css(styles.header)}>FOOD COMPASS</h1>
     );
 }
 
 const styles = StyleSheet.create({
     header: {
-        backgroundColor: "#222",
-        color: "white",
+        backgroundColor: "transparent",
+        color: "red",
         fontSize: "5.5rem",
         margin: 0,
         border: 0,
