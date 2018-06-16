@@ -4,16 +4,19 @@
   "private": true,
   "dependencies": {
     "aphrodite": "^2.2.2",
+    "gh-pages": "^1.2.0",
+    "homepage": "https://terryx96.github.io/Food-Compass/",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-google-maps": "^9.4.5",
-    "react-scripts": "1.1.4",
-    "homepage": "https://terryx96.github.io/Food-Compass/"
+    "react-scripts": "1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }

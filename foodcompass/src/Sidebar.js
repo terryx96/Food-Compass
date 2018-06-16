@@ -40,13 +40,15 @@ const styles = StyleSheet.create({
     div: {
         marginTop: "10px",
         marginBottom: '10px',
-        marginLeft: '3px',
+        marginLeft: '1px',
         color: 'white',
         transition: '.3s ease-out',
         backgroundColor: 'transparent',
         outline: 'none',
         border: 'none',
         paddingRight: '50px',
+        fontSize: '19px',
+        width: '9.9rem',
 
 
         ':hover': {
