@@ -21,18 +21,28 @@ class Benefits extends Component {
     }
 
     render(){
+        const eligibleBenefits = {};
+        const ineligibleBenefits = {};
+        Object.keys(this.props.data).forEach(program => {
+            if(this.props.data[program].eligibility) {
+                eligibleBenefits[program] = this.props.data[program];
+            } else {
+                ineligibleBenefits[program] = this.props.data[program];
+            }
+        });
+        
         return(
             <div>
                 <div className = "eligible"> <p id = "recieved" className = {css(styles.big)}>ELIGIBLE FOR</p>
-                <ol>
-                    {this.state.yes.map(y => <li>{y}</li>)}
-                </ol>
+                    <ul>
+                        {Object.keys(eligibleBenefits).map(program => <li>{program}</li>)}
+                    </ul>
                 </div>
 
                 <div className = "ineligible"> <p id = "recieved"className = {css(styles.big)}>NOT ELIGIBLE FOR</p>
-                <ol>
-                    {this.state.no.map(n => <li>{n}</li>)}
-                </ol>
+                    <ul>
+                        {Object.keys(ineligibleBenefits).map(program => <li>{program}</li>)}
+                    </ul>
                 </div>
             </div>
         )

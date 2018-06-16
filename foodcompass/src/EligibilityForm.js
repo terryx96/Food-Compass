@@ -9,16 +9,21 @@ class EligibilityForm extends Component {
     state = {
         visible: false,
         prompts: [
-             {id : 0, text: "Average Yearly Income", value: 'income', type: 0},
-             {id : 1, text: "Age", value: 'age', type: 0},
-             {id : 2, text: "Household Size: (i.e number of people)", value: 'householdSize', type: 0},
-             {id : 3, text: "Other Government Benefits", value: 'govBenefits', type: 0},
-             {id : 4, text: "How many children do you have? (if any)", value: 'numOfChildren', type: 1},   
+            {id : 0, text: "Gender (Male or Female)", value: 'gender', type: 1},
+            {id : 1, text: "Average Monthly Income", value: 'income', type: 0},
+            {id : 2, text: "Age", value: 'age', type: 0},
+            {id : 3, text: "Household Size: (i.e number of people)", value: 'householdSize', type: 0},
+            {id : 4, text: "Other Government Benefits", value: 'govBenefits', type: 0},
+            {id : 5, text: "How many children do you have? (if any)", value: 'numOfChildren', type: 1},   
         ],
 
-        childQuestion: {id : 5, text: "Age of child", value: 'childrenAge', type: 0},
+        childQuestion: {id : 6, text: "Age of child", value: 'childrenAge', type: 0},
+        pregnantQuestion: {id : 7, text: "Are you currently pregnant?", value: 'isPregnant', type: 1},
+
 
         values: {
+            gender: '',
+            isPregnant: false,
             age: null,
             income: null,
             householdSize: null,
@@ -47,36 +52,40 @@ class EligibilityForm extends Component {
             6: 2812,
             7: 3172,
             8: 3532,
-            more: 360
+            9: 360,
         },
 
-        isEligible: {
+        eligibility: {
             SNAP: {
-              eligibility: false,
-              reason: [],  
+                name: 'SNAP',
+                eligibility: false,
+                reason: [],  
             },
 
             TEFAP: {
+                name: 'TEFAP',
                 eligibility: false,
                 reason: [],  
             },
 
             CSFP: {
+                name: 'CSFP',
                 eligibility: false,
                 benefitAmt: 0,
                 reason: [],  
             },
 
             childrenFood: {
+                name: 'childrenFood',
                 eligibility: false,
                 freeOrReduced: 'free',
                 reason: [],
             },
 
             WIC: {
-              eligibility: false,
-              benefitAmt: 0,
-              reason: [],  
+                name: 'WIC',
+                eligibility: false,
+                reason: [],  
             },
         },
     }
@@ -97,12 +106,24 @@ class EligibilityForm extends Component {
 
         this.setState({values});
     }
+
+    updatePregnancy = () => {
+        let isPregnant = this.state.values.isPregnant;
+        isPregnant = !isPregnant;
+        this.setState({isPregnant});
+    }
  
     render(){
         const childrenQuestion = [];
         for(let i = 0; i < this.state.values.numOfChildren; i++) {
             childrenQuestion.push(<ChildQuestion updateValue={this.updateArray} question={this.state.childQuestion} number={i} />)
         }
+
+        let pregnantQuestion;
+        if(this.state.values.gender.toLowerCase() === 'female') {
+            pregnantQuestion = <Question updateValue={this.updatePregnancy} question={this.state.pregnantQuestion}/>
+        } 
+        
         
         return(
             <form id = "Form" className = {css(styles.input)}  onSubmit = {this.handleSubmit}>
@@ -112,18 +133,15 @@ class EligibilityForm extends Component {
                 <div key={this.state.values.numOfChildren}>
                     {childrenQuestion}
                 </div>
+                <div key={this.state.values.gender}>
+                    {pregnantQuestion}
+                </div>
+                
                 
                 <button type = "submit">Submit</button>
                 
                 {this.state.visible ?
-                (<Benefits data = {[Math.round(Math.random()),
-                    Math.round(Math.random()),
-                    Math.round(Math.random()),
-                    Math.round(Math.random()),
-                    Math.round(Math.random()),
-                    Math.round(Math.random()),
-                    Math.round(Math.random()),
-                    Math.round(Math.random()),]} />) :
+                (<Benefits data = {this.state.eligibility} />) :
                     null
                 }
 
@@ -135,14 +153,14 @@ class EligibilityForm extends Component {
 
     handleSubmit = (ev) => {
         ev.preventDefault();
-        this.setState({visible: true});
-        
         this.runEligibilityCalcuation();
+        this.setState({visible: true});
     } 
 
     runEligibilityCalcuation = () => {
         this.calculateSPANEligbility();
         this.calculateTEFAPEligbility();
+        this.calculateCSFPEligbility();
         this.calculateChildrenFoodEligbility();
         this.calculateWICEligbility();
     }
@@ -151,7 +169,7 @@ class EligibilityForm extends Component {
         const income = this.state.values.income + this.state.values.govBenefits;
         let povertyLevel;
         if(this.state.values.householdSize > 8) {
-            povertyLevel = this.state.federalPovertyAmt[this.state.values.householdSize] + (this.state.values.householdSize - 8) * this.federalPovertyAmt.more;
+            povertyLevel = this.state.federalPovertyAmt[this.state.values.householdSize] + (this.state.values.householdSize - 8) * this.federalPovertyAmt[9];
         } else {
             povertyLevel = this.state.federalPovertyAmt[this.state.values.householdSize]
         }
@@ -167,6 +185,7 @@ class EligibilityForm extends Component {
 
             return;
         } else {
+            console.log(this.state.aidPrograms[program])
             const percentagePovertyLevel = this.state.aidPrograms[program] * povertyLevel;
             if(income < percentagePovertyLevel) {
                 return true;
@@ -186,28 +205,41 @@ class EligibilityForm extends Component {
     }
 
     calculateSPANEligbility = () => {
-        const SPAN = this.state.isEligible.SPAN;
-        if(this.calculateEligibilityOnIncome('SPAN', false)) {
-            SPAN.eligibility = true;
-            SPAN.benefitAmt = 100000000;
+        const SNAP = this.state.eligibility.SNAP;
+        if(this.calculateEligibilityOnIncome('SNAP', false)) {
+            SNAP.eligibility = true;
         }
 
-        this.setState({SPAN});
+        this.setState({SNAP});
     }
 
     calculateTEFAPEligbility = () => {
-        const TEFAP = this.state.isEligible.TEFAP;
+        const TEFAP = this.state.eligibility.TEFAP;
         if(this.calculateEligibilityOnIncome('TEFAP', false)) {
             TEFAP.eligibility = true;
-            TEFAP.benefitAmt = 100000000;
         }
 
         this.setState({TEFAP});
     }
 
+    calculateCSFPEligbility = () => {
+        const CSFP = this.state.eligibility.CSFP;
+        if(this.state.values.age >= 60) {
+            CSFP.eligibility = true;
+        }
+
+        this.setState({CSFP});
+    }
+
     calculateChildrenFoodEligbility = () => {
-        const childrenFood = this.state.isEligible.childrenFood;
-        if(this.state.childAge === 'yes') {
+        const childrenFood = this.state.eligibility.childrenFood;
+        let childUnder18 = false;
+        for(let i = 0; i < this.state.values.numOfChildren; i++) {
+            if(this.state.values.childrenAge[i] <= 18) {
+                childUnder18 = true;
+            }
+        }
+        if(this.state.values.age <= 18 || childUnder18) {
             const result = this.calculateEligibilityOnIncome('childrenFood', true);
             if(result) {
                 childrenFood.eligibility = true;
@@ -221,8 +253,14 @@ class EligibilityForm extends Component {
     }
 
     calculateWICEligbility = () => {
-        const WIC = this.state.isEligible.WIC;
-        if(this.calculateEligibilityOnAge(60, 10000000)) {
+        const WIC = this.state.eligibility.WIC;
+        let childUnder5 = false;
+        for(let i = 0; i < this.state.values.numOfChildren; i++) {
+            if(this.state.values.childrenAge[i] <= 5) {
+                childUnder5 = true;
+            }
+        }
+        if((this.state.values.gender.toLowerCase() === 'female' && ( this.state.values.isPregnant || childUnder5)) && this.calculateEligibilityOnAge(60, 10000000)) {
             WIC.eligibility = true;
         }
 
