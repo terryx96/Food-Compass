@@ -30,7 +30,7 @@ body {
 
 #Form {
   background-image: url('images/formBackground.jpg'); 
-  overflow: hidden;
+  height: auto;
 
 }
 
@@ -50,6 +50,15 @@ body {
 
 #terry {
   background-image: url('images/terry.jpg');
+}
+
+#recieved:{
+  color: rgba(0,93,0,.7);
+
+}
+
+#notrecieved:{
+  color: rgba(93,0,0,.7);
 }
 
 

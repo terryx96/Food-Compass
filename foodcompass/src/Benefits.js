@@ -52,6 +52,9 @@ const styles = StyleSheet.create({
     big: {
         color: 'white',
         fontSize: '50px',
+    },
+    recieved:{
+        
     }
 })
 

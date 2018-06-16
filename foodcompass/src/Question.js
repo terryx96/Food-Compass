@@ -15,16 +15,16 @@ class Question extends React.Component {
     render() {
         if(this.props.question.type === 1) {
             return(
-                <div className = {css(styles.input)} key = {this.props.question.id}>
+                <div key = {this.props.question.id}>
                     <p>{this.props.question.text}</p>
-                    <input key = {this.props.question.id} type = "text" onChange={this.handleChange} />
+                    <input className = {css(styles.input)} key = {this.props.question.id} type = "text" onChange={this.handleChange} />
                 </div> 
             )
         }
         return(
-            <div className = {css(styles.input)} key = {this.props.question.id}>
+            <div key = {this.props.question.id}>
                         <p>{this.props.question.text}</p>
-                        <input key = {this.props.question.id} type = "number" onChange={this.handleChange} />
+                        <input className = {css(styles.input)}key = {this.props.question.id} type = "number" onChange={this.handleChange} />
             </div>
         )
     }
@@ -32,7 +32,9 @@ class Question extends React.Component {
 
 
 const styles = StyleSheet.create({
-    
+    input:{
+        borderRadius: '10px',
+    }
 
 });
 
