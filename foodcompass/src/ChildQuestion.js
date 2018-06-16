@@ -10,17 +10,9 @@ class Question extends React.Component {
         ev.preventDefault();
         const temp = ev.target.value
         this.setState({value: temp});
-        this.props.updateValue(this.props.question.value, temp);
+        this.props.updateValue(this.props.question.value, temp, this.props.number);
     }
     render() {
-        if(this.props.question.type === 1) {
-            return(
-                <div className = {css(styles.input)} key = {this.props.question.id}>
-                    <p>{this.props.question.text}</p>
-                    <input key = {this.props.question.id} type = "text" onChange={this.handleChange} />
-                </div> 
-            )
-        }
         return(
             <div className = {css(styles.input)} key = {this.props.question.id}>
                         <p>{this.props.question.text}</p>
