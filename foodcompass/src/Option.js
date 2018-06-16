@@ -1,17 +1,19 @@
 import React from 'react';
 import {StyleSheet, css} from '../node_modules/aphrodite';
+import './App.css';
+
 
 const Option = ({text, loadForm}) => {
     return (
-        <button className = {css(styles.button)} onClick = {loadForm}> {text} </button>
+        <button id = "button" className = {css(styles.button)} onClick = {loadForm}> {text} </button>
     );
 }
 
 const styles = StyleSheet.create({
     button: {
         borderRadius: '50px',
-        backgroundColor: 'rgba(0,150,255,.8)',
         border: '1px solid rgba(155,155,155, .8)',
+        color: 'white',
 
         paddingTop: '30px',
         paddingBottom: '30px',
@@ -28,7 +30,7 @@ const styles = StyleSheet.create({
         transition: "backgroundColor 1s ease-out",
 
         ':hover':{
-            backgroundColor: 'blue',
+            backgroundImage: "none",
             cursor: 'pointer',
             
         },

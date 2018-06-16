@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './App.css';
 
 import Option from './Option';
 import EligibilityForm from './EligibilityForm';
@@ -18,7 +19,7 @@ class Main extends Component {
 
     render(){
         return(
-            <div>
+            <div id = "main">
                 {this.state.clicked ?
                     <EligibilityForm updateValue={this.updateValue}/> :
                     <Option text = "Determine your Eligibility" loadForm = {this.loadForm}/>}
@@ -38,6 +39,8 @@ class Main extends Component {
     loadForm = () => {
         this.setState({clicked: true});
     }
+
+    
 
 
 }

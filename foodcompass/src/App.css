@@ -1,14 +1,24 @@
-@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah');
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+
 body {
-  font-family: 'Gloria Hallelujah', cursive;
+  font-family: 'Source Code Pro', monospace;
+  height: 100%;
+  background-image: url('images/mainBackground.jpg')
 
 }
-.App-header {
-  background-color: #222;
-  color: white;
-  font-size: 5.5rem;
-  padding: 1px;
-  margin: 0;
-  border: 0;
+
+#button {
+  background-image: url('images/buttonBackground.jpg');
+
+}
+
+#Form {
+  background-image: url('images/formBackground.jpg');
+
+}
+
+#main {
+  background-color: red;
+  box-align: center;
 }
 

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, css} from '../node_modules/aphrodite';
 import Question from './Question';
+import './App.css';
 
 class EligibilityForm extends Component {
     state = {
@@ -14,7 +15,7 @@ class EligibilityForm extends Component {
 
     render(){
         return(
-            <form className = "Form" onSubmit = {this.handleSubmit}>
+            <form id = "Form" className = {css(styles.input)}  onSubmit = {this.handleSubmit}>
                 {this.state.prompts.map(p => 
                     <Question updateValue={this.props.updateValue} question={p}/>
                 )}
@@ -39,8 +40,13 @@ class EligibilityForm extends Component {
 }
 
 const styles = StyleSheet.create({
-
-
+        input: {
+            alignSelf: "center",
+            textAlign: 'center',
+            alignSelf: "center",
+            borderRadius: '50px',
+            width: '50%',
+        }
 });
 
 export default EligibilityForm;
