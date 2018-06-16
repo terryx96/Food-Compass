@@ -16,7 +16,7 @@ class Question extends React.Component {
         return(
             <div className = {css(styles.input)} key = {this.props.question.id}>
                         <p>{this.props.question.text}</p>
-                        <input key = {this.props.question.id} type = "number" value={this.state.value} onChange={this.handleChange} />
+                        <input key = {this.props.question.id} type = "number" onChange={this.handleChange} />
             </div>
         )
     }
