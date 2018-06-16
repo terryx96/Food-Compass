@@ -35,7 +35,8 @@ class Main extends Component {
         switch(this.props.page){
             case "0": return <Homepage />; break;
             case "1": return <AboutUs />; break;
-            case "2": return <EligibilityForm updateValue = {this.updateValue}/>; break;
+            case "2": return <EligibilityForm  updateValue = {this.updateValue}/>; break;
+            case "3": return <Map />; break;
             default: break;
             // <Option text = " your Eligibility" loadForm = {this.loadForm}/>
         }
