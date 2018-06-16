@@ -7,14 +7,21 @@ import Main from './Main';
 import Sidebar from './Sidebar';
 
 class App extends Component {
+  state = {
+    page: "0",
+  }
   render() {
     return (
       <div>
         <Header />
-        <Sidebar />
-        <Main />
+        <Sidebar getPage = {this.getPage} />
+        <Main page = {this.state.page} />
       </div>
     );
+  }
+
+  getPage = (page) => {
+    this.setState({page})
   }
 
   

@@ -3,10 +3,13 @@ import './App.css';
 
 import Option from './Option';
 import EligibilityForm from './EligibilityForm';
+import Map from './Map';
 
 import Benefits from './Benefits';
+import AboutUs from './AboutUs';
 
 import {StyleSheet, css} from 'aphrodite';
+import Homepage from './Homepage';
 
 class Main extends Component {
     state = {
@@ -22,13 +25,20 @@ class Main extends Component {
     render(){
         return(
             <div className = {css(styles.main)}>
-                {this.state.clicked ?
-                    <EligibilityForm updateValue={this.updateValue}/> :
-                    <Option text = "Determine your Eligibility" loadForm = {this.loadForm}/>}
-
+                {this.selectPage()}
             </div>
             
         );
+    }
+
+    selectPage = () => {
+        switch(this.props.page){
+            case "0": return <Homepage />; break;
+            case "1": return <AboutUs />; break;
+            case "2": return <Option text = "Determine your Eligibility" loadForm = {this.loadForm}/>; break;
+            default: break;
+
+        }
     }
 
     updateValue = (key, value) => {

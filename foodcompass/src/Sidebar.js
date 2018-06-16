@@ -1,15 +1,21 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {StyleSheet, css} from 'aphrodite';
 
-const Sidebar = ({ links }) => {
-    return(
-        <div className = {css(styles.sideBar)}> <p className = {css(styles.p)}>Food Compass</p>
-            <div className = {css(styles.div)}>Home</div>
-            <div className = {css(styles.div)}>About us</div>
-            <div className = {css(styles.div)}>Eligibility</div>
-            <div className = {css(styles.div)}>Nearby Aid</div>
-        </div>
-    );
+class Sidebar extends Component {
+    render(){
+        return(
+            <div className = {css(styles.sideBar)}> <p className = {css(styles.p)}>Food Compass</p>
+                <button onClick = {this.handleClick} value = "0" className = {css(styles.div)}>Home</button>
+                <button onClick = {this.handleClick} value = "1" className = {css(styles.div)}>About us</button>
+                <button onClick = {this.handleClick} value = "2" className = {css(styles.div)}>Eligibility</button>
+                <button onClick = {this.handleClick} value = "3" className = {css(styles.div)}>Nearby Aid</button>
+            </div>
+        );
+    }
+
+    handleClick = (ev) => {
+        this.props.getPage(ev.target.value);
+    }
 }
 
 const styles = StyleSheet.create({
@@ -37,6 +43,11 @@ const styles = StyleSheet.create({
         marginLeft: '3px',
         color: 'white',
         transition: '.3s ease-out',
+        backgroundColor: 'transparent',
+        outline: 'none',
+        border: 'none',
+        paddingRight: '50px',
+
 
         ':hover': {
             cursor: 'pointer',
