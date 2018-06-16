@@ -14,12 +14,6 @@ import Homepage from './Homepage';
 class Main extends Component {
     state = {
         clicked: false,
-        values: {
-            age: 0,
-            income: 0,
-            householdSize: 0,
-            govBenefits: 0,
-        },
     }
 
     render(){
@@ -40,13 +34,6 @@ class Main extends Component {
             default: break;
             // <Option text = " your Eligibility" loadForm = {this.loadForm}/>
         }
-    }
-
-    updateValue = (key, value) => {
-        const values = this.state.values;
-        values[key] = value;
-
-        this.setState({values});
     }
 
     loadForm = () => {
