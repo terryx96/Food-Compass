@@ -3,8 +3,19 @@
 body {
   font-family: 'Source Code Pro', monospace;
   height: 100%;
-  background-image: url('images/mainBackground.jpg')
+  background-image: url('images/mainBackground.jpg');
+  
 
+
+}
+
+@keyframes slide {
+  0%{
+    transform: translate3d(0, 0, 0);
+  }
+  100%{
+    transform: translate3d(-1692px, 0, 0);
+  }
 }
 
 #button {
@@ -35,6 +46,10 @@ body {
 
 #AboutUs{
   background-image: url('images/formBackground.jpg'); 
+}
+
+#Header {
+  -webkit-text-stroke: 1px black;
 }
 
 
