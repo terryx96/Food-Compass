@@ -3,23 +3,7 @@ import {StyleSheet, css} from 'aphrodite';
 import './App.css';
 
 class Benefits extends Component {
-    state = {
-        options: [
-            "Women Infant Children (WIC)",
-            "Summer Food Service Program (SFSP)",
-            "School Breakfast Program (SBP)",
-            "National School Lunch Program (NSLP)",
-            "Child and Adult Care Food Program (CACFP)",
-            "Commodity Supplemental Food Program (CSFP)",
-            "The Emergency Food Assistance Program (TEFAP)",
-            "Supplemental Nutrient Assistance Program (SNAP)",
-        ],
-        yes: [],
-        no: [],
-
- 
-    }
-
+    
     render(){
         const eligibleBenefits = {};
         const ineligibleBenefits = {};
@@ -32,16 +16,16 @@ class Benefits extends Component {
         });
         
         return(
-            <div>
-                <div className = "eligible"> <p id = "recieved" className = {css(styles.big)}>ELIGIBLE FOR</p>
+            <div key={this.props.num}>
+                <div className = "eligible"> <p id = "recieved" className = {css(styles.big)}  key={this.props.num}>ELIGIBLE FOR</p>
                     <ul>
-                        {Object.keys(eligibleBenefits).map(program => <li>{program}</li>)}
+                        {Object.keys(eligibleBenefits).map(program => <li>{this.props.data[program].displayElement}</li>)}
                     </ul>
                 </div>
 
-                <div className = "ineligible"> <p id = "recieved"className = {css(styles.big)}>NOT ELIGIBLE FOR</p>
-                    <ul>
-                        {Object.keys(ineligibleBenefits).map(program => <li>{program}</li>)}
+                <div className = "ineligible"> <p id = "recieved"className = {css(styles.big)}  key={this.props.num}>NOT ELIGIBLE FOR</p>
+                    <ul key={this.props.num}>
+                        {Object.keys(ineligibleBenefits).map(program => <li>{this.props.data[program].displayElement}</li>)}
                     </ul>
                 </div>
             </div>

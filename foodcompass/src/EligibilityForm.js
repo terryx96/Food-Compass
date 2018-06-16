@@ -4,6 +4,9 @@ import Question from './Question';
 import ChildQuestion from './ChildQuestion';
 import './App.css';
 import Benefits from './Benefits';
+import Eligible from './Eligible';
+import Ineligible from './Ineligible';
+import FoodEligible from './FoodEligible';
 
 class EligibilityForm extends Component {
     state = {
@@ -57,37 +60,49 @@ class EligibilityForm extends Component {
 
         eligibility: {
             SNAP: {
-                name: 'SNAP',
+                name: 'Supplemental Nutrition Assistance Program',
+                descrip: 'SNAP provides timely, targeted, and temporary benefits to low-income Americans to buy groceries.',
+                link: 'https://www.fssabenefits.in.gov/CitizenPortal/application.do',
                 eligibility: false,
-                reason: [],  
+                reason: [], 
+                displayElement: null, 
             },
 
             TEFAP: {
-                name: 'TEFAP',
+                name: 'The Emergency Food Assistance Program',
+                descrip: 'TEFAP provides USDA commodities to families in need of short-term hunger relief through emergency food providers like food banks.',
+                link: 'https://www.in.gov/isdh/files/TEFAP%20Web%20Update%2006062018.pdf',
                 eligibility: false,
                 reason: [],  
+                displayElement: null, 
             },
 
             CSFP: {
-                name: 'CSFP',
+                name: 'The Commodity Supplemental Food Program',
+                descrip: 'Provides food assistance for low-income seniors with a monthly package of healthy USDA commodities.',
+                link: 'https://www.in.gov/isdh/files/CSFP%20Map%2002192018.pdf',
                 eligibility: false,
-                benefitAmt: 0,
                 reason: [],  
+                displayElement: null, 
             },
 
             childrenFood: {
-                name: 'childrenFood',
                 eligibility: false,
                 freeOrReduced: 'free',
-                reason: [],
+                displayElement: null, 
             },
 
             WIC: {
-                name: 'WIC',
+                name: 'Women, Infants, and Children',
+                descrip: 'Provides nutritious foods and nutrition education for low-income, at risk women, infants.',
+                link: 'https://www.in.gov/isdh/20424.htm',
                 eligibility: false,
                 reason: [],  
+                displayElement: null, 
             },
         },
+
+        num: 0,
     }
  
     updateValue = (key, value) => {
@@ -107,10 +122,14 @@ class EligibilityForm extends Component {
         this.setState({values});
     }
 
-    updatePregnancy = () => {
-        let isPregnant = this.state.values.isPregnant;
-        isPregnant = !isPregnant;
-        this.setState({isPregnant});
+    updatePregnancy = (key, value) => {
+        const values = this.state.values;
+        if(value.toLowerCase() === 'yes') {
+            values.isPregnant = true;
+        } else {
+            values.isPregnant = false;
+        }
+        this.setState({values});
     }
  
     render(){
@@ -141,7 +160,7 @@ class EligibilityForm extends Component {
                 <button type = "submit">Submit</button>
                 
                 {this.state.visible ?
-                (<Benefits data = {this.state.eligibility} />) :
+                (<Benefits num={this.state.num} data = {this.state.eligibility} />) :
                     null
                 }
 
@@ -154,11 +173,13 @@ class EligibilityForm extends Component {
     handleSubmit = (ev) => {
         ev.preventDefault();
         this.runEligibilityCalcuation();
+        this.setState({num: (this.state.num + 1)})
+        this.setState({visible: false});
         this.setState({visible: true});
     } 
 
     runEligibilityCalcuation = () => {
-        this.calculateSPANEligbility();
+        this.calculateSNAPEligbility();
         this.calculateTEFAPEligbility();
         this.calculateCSFPEligbility();
         this.calculateChildrenFoodEligbility();
@@ -185,7 +206,6 @@ class EligibilityForm extends Component {
 
             return;
         } else {
-            console.log(this.state.aidPrograms[program])
             const percentagePovertyLevel = this.state.aidPrograms[program] * povertyLevel;
             if(income < percentagePovertyLevel) {
                 return true;
@@ -196,18 +216,17 @@ class EligibilityForm extends Component {
         
     }
 
-    calculateEligibilityOnAge = (lowerBound, upperBound) => {
-        if(lowerBound < this.state.age < upperBound) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    calculateSPANEligbility = () => {
+    calculateSNAPEligbility = () => {
         const SNAP = this.state.eligibility.SNAP;
         if(this.calculateEligibilityOnIncome('SNAP', false)) {
             SNAP.eligibility = true;
+            SNAP.displayElement = <Eligible program={SNAP.name} descrip={SNAP.descrip}
+                                            link={SNAP.link}/>
+        } else {
+            SNAP.eligibility = false;
+            SNAP.displayElement = <Ineligible program={SNAP.name} 
+                                    reasons={[`The sum of your monthly income and government benefits is too high for`]}
+                                    link={SNAP.link}/>
         }
 
         this.setState({SNAP});
@@ -217,6 +236,13 @@ class EligibilityForm extends Component {
         const TEFAP = this.state.eligibility.TEFAP;
         if(this.calculateEligibilityOnIncome('TEFAP', false)) {
             TEFAP.eligibility = true;
+            TEFAP.displayElement = <Eligible program={TEFAP.name} descrip={TEFAP.descrip}
+                                            link={TEFAP.link}/>
+        } else {
+            TEFAP.eligibility = false;
+            TEFAP.displayElement = <Ineligible program={TEFAP.name} 
+                                    reasons={[`The sum of your monthly income and government benefits is too high`]}
+                                    link={TEFAP.link}/>
         }
 
         this.setState({TEFAP});
@@ -224,8 +250,22 @@ class EligibilityForm extends Component {
 
     calculateCSFPEligbility = () => {
         const CSFP = this.state.eligibility.CSFP;
-        if(this.state.values.age >= 60) {
+        if(this.state.values.age >= 60 && this.calculateEligibilityOnIncome('CSFP', false)) {
             CSFP.eligibility = true;
+            CSFP.displayElement = <Eligible program={CSFP.name} descrip={CSFP.descrip}
+                                            link={CSFP.link}/>
+        } else {
+            const reasons = [];
+            if(!(this.calculateEligibilityOnIncome('CSFP', false))) {
+                reasons.push(`The sum of your monthly income and government benefits is too high`)
+            }
+
+            if(this.state.values.age < 60) {
+                reasons.push(`You must be 60 years or older`)
+            }
+            CSFP.displayElement = <Ineligible program={CSFP.name} 
+                                    reasons={reasons}
+                                    link={CSFP.link}/>
         }
 
         this.setState({CSFP});
@@ -234,20 +274,30 @@ class EligibilityForm extends Component {
     calculateChildrenFoodEligbility = () => {
         const childrenFood = this.state.eligibility.childrenFood;
         let childUnder18 = false;
+        const reasons = [];
+        let eligible = false;
+
         for(let i = 0; i < this.state.values.numOfChildren; i++) {
             if(this.state.values.childrenAge[i] <= 18) {
                 childUnder18 = true;
             }
         }
+
         if(this.state.values.age <= 18 || childUnder18) {
             const result = this.calculateEligibilityOnIncome('childrenFood', true);
             if(result) {
                 childrenFood.eligibility = true;
+                eligible = true;
                 childrenFood.freeOrReduced = result;
             } else {
+                reasons.push('The sum of your monthly income and government benefits is too high')
                 childrenFood.eligibility = false;
             }
+        } else {
+            reasons.push('You must be under 18 or have a child who is under 18')
         }
+
+        childrenFood.displayElement = <FoodEligible successus={eligible} reasons={reasons}/>
 
         this.setState({childrenFood});
     }
@@ -255,13 +305,36 @@ class EligibilityForm extends Component {
     calculateWICEligbility = () => {
         const WIC = this.state.eligibility.WIC;
         let childUnder5 = false;
+        const reasons = [];
+
         for(let i = 0; i < this.state.values.numOfChildren; i++) {
             if(this.state.values.childrenAge[i] <= 5) {
                 childUnder5 = true;
             }
         }
-        if((this.state.values.gender.toLowerCase() === 'female' && ( this.state.values.isPregnant || childUnder5)) && this.calculateEligibilityOnAge(60, 10000000)) {
-            WIC.eligibility = true;
+        if(this.state.values.gender.toLowerCase() === 'female') {
+            if((this.state.values.isPregnant || childUnder5) && this.calculateEligibilityOnIncome('WIC', false)) {
+                WIC.eligibility = true;
+                WIC.displayElement = <Eligible program={WIC.name} descrip={WIC.descrip}
+                                                link={WIC.link}/>
+            } else {
+                if(!(this.state.values.isPregnant || childUnder5)) {
+                    reasons.push(`You must be pregnant or have a child younger than 5 years old for`);
+                }
+
+                if(!(this.calculateEligibilityOnIncome('WIC', false))) {
+                    reasons.push(`The sum of your monthly income and government benefits is too high for`);
+                }
+                
+                WIC.displayElement = <Ineligible program={WIC.name} 
+                                        reasons={reasons}
+                                        link={WIC.link}/>
+            }
+        } else {
+            reasons.push(`You must be female`)
+            WIC.displayElement = <Ineligible program={WIC.name} 
+                                        reasons={reasons}
+                                        link={WIC.link}/>
         }
 
         this.setState({WIC});
