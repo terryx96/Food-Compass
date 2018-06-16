@@ -7,7 +7,7 @@ import Map from './Map';
 
 import Benefits from './Benefits';
 import AboutUs from './AboutUs';
-
+import Terms from './Terms';
 import {StyleSheet, css} from 'aphrodite';
 import Homepage from './Homepage';
 
@@ -31,6 +31,7 @@ class Main extends Component {
             case "1": return <AboutUs />; break;
             case "2": return <EligibilityForm updateValue = {this.updateValue}/>; break;
             case "3": return <Map />; break;
+            case "4": return <Terms />; break;
             default: break;
             // <Option text = " your Eligibility" loadForm = {this.loadForm}/>
         }

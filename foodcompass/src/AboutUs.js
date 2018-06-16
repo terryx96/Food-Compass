@@ -5,7 +5,7 @@ const AboutUs = () =>{
     return(
         <div>
                 <div id = "AboutUs" className = {css(styles.person)}>
-                <img className = {css(styles.img)} href = "images/terry.jpg" alt = "Terry"/>
+                <img className = {css(styles.img)} src = "images/terry.jpg" alt = "Terry"/>
                 Terry Wade is a computer science student at Valparaiso University. On this project,
                 he worked primarily on front-end development, something completely new to him!
                 </div>
@@ -34,6 +34,7 @@ const AboutUs = () =>{
 
 const styles = StyleSheet.create({
     person:{
+        backgroundColor: 'rgba(255,255,255,.8)',
         display: 'block',
         marginLeft: 'auto',
         marginRight: 'auto',

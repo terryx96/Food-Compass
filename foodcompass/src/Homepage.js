@@ -4,10 +4,10 @@ import {StyleSheet, css} from 'aphrodite';
 const Homepage = () => {
     return(
         <div style = {styles.main}>
-            <p style = {styles.p}>Welcome to Food Compass</p>
+            <p style = {styles.p}>Welcome to BeneFood</p>
             <p style = {styles.body}>  
                 <p style = {styles.leads}>Our Mission:</p> 
-                    We at Food Compass aspire to connect those in need with the proper government bodies
+                    We at BeneFood aspire to connect those in need with the proper government bodies
                     in an effort to make sure everyone receives the benefits they qualify for. Hunger has
                     become a devistating problem in today's society, and we hope to change that for the better
                     by creating a gateway of communication for those in need.
@@ -22,7 +22,7 @@ const styles = {
         marginLeft: 'auto',
         marginRight: 'auto',
         textAlign: "center",
-        backgroundColor: 'white',
+        backgroundColor: 'rgba(255,255,255,.8)',
         borderRadius: '20px',
         border: '1px solid rgba(100,100,100,.8)',
         width: '70%',
