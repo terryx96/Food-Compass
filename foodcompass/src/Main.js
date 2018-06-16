@@ -25,7 +25,7 @@ class Main extends Component {
                 {this.state.clicked ?
                     <EligibilityForm updateValue={this.updateValue}/> :
                     <Option text = "Determine your Eligibility" loadForm = {this.loadForm}/>}
-                    <Benefits data = {[true,true,false,true,false,false,false,true]} />
+
             </div>
             
         );

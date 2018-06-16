@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-
+import {StyleSheet, css} from 'aphrodite';
+import './App.css';
 
 class Benefits extends Component {
     state = {
@@ -16,24 +17,24 @@ class Benefits extends Component {
         yes: [],
         no: [],
 
-
+ 
     }
 
     render(){
         return(
             <div>
-                <div className = "eligible"> BENEFITS RECIEVED
-                <ul>
+                <div className = "eligible"> <p id = "recieved" className = {css(styles.big)}>ELIGIBLE FOR</p>
+                <ol>
                     {this.state.yes.map(y => <li>{y}</li>)}
-                </ul>
+                </ol>
                 </div>
 
-                <div className = "ineligible"> BENEFITS NOT RECIEVED
-                <ul>
+                <div className = "ineligible"> <p id = "recieved"className = {css(styles.big)}>NOT ELIGIBLE FOR</p>
+                <ol>
                     {this.state.no.map(n => <li>{n}</li>)}
-                </ul>
+                </ol>
                 </div>
-                <button onClick = {this.determineEligibility}>ddddd</button>
+                <button onClick = {this.determineEligibility}>Submit</button>
             </div>
         )
     }
@@ -49,10 +50,16 @@ class Benefits extends Component {
                 tempNo.push(this.state.options[i]);
             }
         }
-        this.setState({tempYes, tempNo});
-        alert(tempNo);
+        this.setState({yes: tempYes, no: tempNo});
     }
 
 }
+
+const styles = StyleSheet.create({
+    big: {
+        color: 'white',
+        fontSize: '50px',
+    }
+})
 
 export default Benefits;

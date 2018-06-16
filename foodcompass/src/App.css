@@ -9,7 +9,7 @@ body {
 
 #button {
   background-image: url('images/buttonBackground.jpg');
-  transition: background-image 1s ease-out;
+  transition: 1s ease-out;
 
 }
 
@@ -18,8 +18,13 @@ body {
 }
 
 #Form {
-  background-image: url('images/formBackground.jpg');
+  background-image: url('images/formBackground.jpg'); 
+  overflow: hidden;
 
+}
+
+#recieved{
+  -webkit-text-stroke: 1px black;
 }
 
 
