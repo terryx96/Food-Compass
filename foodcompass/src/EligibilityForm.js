@@ -17,7 +17,7 @@ class EligibilityForm extends Component {
         return(
             <form className = "Form" onSubmit = {this.handleSubmit}>
                 {this.state.prompts.map(p => 
-                    <div>
+                    <div key = {p.id}>
                         <p>{p.text}</p>
                         <input key = {p.id} type = "number" />
                     </div>
@@ -30,8 +30,10 @@ class EligibilityForm extends Component {
 
     handleSubmit = (ev) => {
         ev.preventDefault();
-        inputArr.map(a => alert(a.value));
-        alert("Submit Handled");
+        let values = [...document.querySelectorAll("input")];
+        values = values.map(v => v.value);
+        this.setState({values});
+        alert(values);
     } 
 
 
