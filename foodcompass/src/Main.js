@@ -6,6 +6,7 @@ import EligibilityForm from './EligibilityForm';
 class Main extends Component {
     state = {
         clicked: false,
+        data: [],
     }
 
     render(){

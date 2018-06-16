@@ -1,39 +1,42 @@
 import React, {Component} from 'react';
 import {StyleSheet, css} from '../node_modules/aphrodite';
 
-import Prompt from './Prompt';
 
 class EligibilityForm extends Component {
     state = {
         prompts: [
-            {id : 0, text: "Average Yearly Income", value: 0, type: 0},
-            {id : 1, text: "Age", value: 0, type: 0},
-            {id : 2, text: "Household Size: (i.e number of people)", value: 0, type: 0},
-            {id : 3, text: "Other Government Benefits", value: 0, type: 0},
-        ]
+             {id : 0, text: "Average Yearly Income", value: 0, type: 0},
+             {id : 1, text: "Age", value: 0, type: 0},
+             {id : 2, text: "Household Size: (i.e number of people)", value: 0, type: 0},
+             {id : 3, text: "Other Government Benefits", value: 0, type: 0},
+        ],
+        values: [],
     }
 
     render(){
         return(
-            <form className = "Form">
+            <form className = "Form" onSubmit = {this.handleSubmit}>
                 {this.state.prompts.map(p => 
                     <div>
-                        <Prompt key = {p.id} info = {p} getValue = {this.getValue}/>
+                        <p>{p.text}</p>
+                        <input key = {p.id} type = "number" />
                     </div>
                 )}
-                <button type = "submit" onClick = {this.handleSubmit}>Submit</button>
-            </form>
+                <button type = "submit">Submit</button>
+            </form>    
+
         );
     }
 
     handleSubmit = (ev) => {
         ev.preventDefault();
+        inputArr.map(a => alert(a.value));
         alert("Submit Handled");
     } 
 
-    getValue = (value) => {
-        
-    }
+
+
+
 
 }
 
