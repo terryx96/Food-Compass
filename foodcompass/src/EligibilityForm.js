@@ -187,7 +187,7 @@ class EligibilityForm extends Component {
     }
 
     calculateEligibilityOnIncome = (program, twoLevels) => {
-        const income = this.state.values.income + this.state.values.govBenefits;
+        const income = parseInt(this.state.values.income, 10) + parseInt(this.state.values.govBenefits, 10);
         let povertyLevel;
         if(this.state.values.householdSize > 8) {
             povertyLevel = this.state.federalPovertyAmt[this.state.values.householdSize] + (this.state.values.householdSize - 8) * this.federalPovertyAmt[9];
@@ -206,7 +206,9 @@ class EligibilityForm extends Component {
 
             return;
         } else {
+            console.log(income);
             const percentagePovertyLevel = this.state.aidPrograms[program] * povertyLevel;
+            console.log(percentagePovertyLevel);
             if(income < percentagePovertyLevel) {
                 return true;
             } else {
