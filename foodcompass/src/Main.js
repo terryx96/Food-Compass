@@ -29,7 +29,7 @@ class Main extends Component {
             </div>
             
         );
-    }
+    } 
 
     selectPage = () => {
         switch(this.props.page){

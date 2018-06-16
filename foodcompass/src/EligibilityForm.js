@@ -14,7 +14,7 @@ class EligibilityForm extends Component {
              {id : 3, text: "Other Government Benefits", value: 'govBenefits', type: 0},
         ],
     }
-
+ 
     render(){
         return(
             <form id = "Form" className = {css(styles.input)}  onSubmit = {this.handleSubmit}>

@@ -3,7 +3,16 @@ import {StyleSheet, css} from 'aphrodite';
 
 const Homepage = () => {
     return(
-        <div style = {styles.main}>Welcome to Food Compass</div>
+        <div style = {styles.main}>
+            <p style = {styles.p}>Welcome to Food Compass</p>
+            <p style = {styles.body}>  
+                <p style = {styles.leads}>Our Mission:</p> 
+                    We at Food Compass aspire to connect those in need with the proper government bodies
+                    in an effort to make sure everyone receives the benefits they qualify for. Hunger has
+                    become a devistating problem in today's society, and we hope to change that for the better
+                    by creating a gateway of communication for those in need.
+                </p>
+        </div>
     );
 }
 
@@ -22,7 +31,22 @@ const styles = {
         paddingBottom: '10px',
         boxShadow: "25px 5px 50px rgba(0,0,0,.8)",
 
+    },
+    p:{
+        fontSize: '30px',
+        textDecoration: 'underline',
+    },
+    body:{
+        fontSize: '20px',
+        color: 'rgba(100,100,100,.9)',
+        
+    },
+    leads:{
+        fontSize: '25px',
+        color: 'black',
+        paddingBottom: '2px',
     }
+
 }
 
 export default Homepage;

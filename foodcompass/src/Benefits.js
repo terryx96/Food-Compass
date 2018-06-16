@@ -34,7 +34,6 @@ class Benefits extends Component {
                     {this.state.no.map(n => <li>{n}</li>)}
                 </ol>
                 </div>
-                <button onClick = {this.determineEligibility}>Submit</button>
             </div>
         )
     }
