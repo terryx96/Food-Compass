@@ -41,11 +41,17 @@ class EligibilityForm extends Component {
 
 const styles = StyleSheet.create({
         input: {
-            alignSelf: "center",
+            width: '626px',
+            display: 'block',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            border: '1px solid rgba(100,100,100,.8)',
+            borderRadius: "50px",
             textAlign: 'center',
-            alignSelf: "center",
-            borderRadius: '50px',
-            width: '50%',
+            paddingTop: '10px',
+            paddingBottom: '10px',
+            boxShadow: "25px 5px 50px rgba(0,0,0,.4)",
+            
         }
 });
 

@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
         transition: "backgroundColor 1s ease-out",
 
         ':hover':{
-            backgroundImage: "none",
             cursor: 'pointer',
             
         },

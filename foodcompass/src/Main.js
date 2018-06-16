@@ -6,6 +6,8 @@ import EligibilityForm from './EligibilityForm';
 
 import Benefits from './Benefits';
 
+import {StyleSheet, css} from 'aphrodite';
+
 class Main extends Component {
     state = {
         clicked: false,
@@ -19,7 +21,7 @@ class Main extends Component {
 
     render(){
         return(
-            <div id = "main">
+            <div className = {css(styles.main)}>
                 {this.state.clicked ?
                     <EligibilityForm updateValue={this.updateValue}/> :
                     <Option text = "Determine your Eligibility" loadForm = {this.loadForm}/>}
@@ -40,9 +42,12 @@ class Main extends Component {
         this.setState({clicked: true});
     }
 
-    
-
-
 }
+
+const styles = StyleSheet.create({
+    main: {
+        alignSelf: 'center',
+    }
+})
 
 export default Main;

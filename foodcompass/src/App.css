@@ -9,7 +9,12 @@ body {
 
 #button {
   background-image: url('images/buttonBackground.jpg');
+  transition: background-image 1s ease-out;
 
+}
+
+#button:hover {
+  background-image: url('images/buttonHoverBackground.jpg');
 }
 
 #Form {
@@ -17,8 +22,5 @@ body {
 
 }
 
-#main {
-  background-color: red;
-  box-align: center;
-}
+
 
