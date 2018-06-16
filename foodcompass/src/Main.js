@@ -35,9 +35,9 @@ class Main extends Component {
         switch(this.props.page){
             case "0": return <Homepage />; break;
             case "1": return <AboutUs />; break;
-            case "2": return <Option text = "Determine your Eligibility" loadForm = {this.loadForm}/>; break;
+            case "2": return <EligibilityForm updateValue = {this.updateValue}/>; break;
             default: break;
-
+            // <Option text = " your Eligibility" loadForm = {this.loadForm}/>
         }
     }
 
@@ -56,7 +56,11 @@ class Main extends Component {
 
 const styles = StyleSheet.create({
     main: {
-        alignSelf: 'center',
+        display: 'block',
+        width: '50%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+
     }
 })
 

@@ -34,7 +34,6 @@ const AboutUs = () =>{
 
 const styles = StyleSheet.create({
     person:{
-        width: '626px',
         display: 'block',
         marginLeft: 'auto',
         marginRight: 'auto',

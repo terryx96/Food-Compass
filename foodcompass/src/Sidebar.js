@@ -6,9 +6,9 @@ class Sidebar extends Component {
         return(
             <div className = {css(styles.sideBar)}> <p className = {css(styles.p)}>Food Compass</p>
                 <button onClick = {this.handleClick} value = "0" className = {css(styles.div)}>Home</button>
-                <button onClick = {this.handleClick} value = "1" className = {css(styles.div)}>About us</button>
-                <button onClick = {this.handleClick} value = "2" className = {css(styles.div)}>Eligibility</button>
-                <button onClick = {this.handleClick} value = "3" className = {css(styles.div)}>Nearby Aid</button>
+                <br/><button onClick = {this.handleClick} value = "1" className = {css(styles.div)}>About us</button>
+                <br/><button onClick = {this.handleClick} value = "2" className = {css(styles.div)}>Eligibility</button>
+                <br/><button onClick = {this.handleClick} value = "3" className = {css(styles.div)}>Nearby Aid</button>
             </div>
         );
     }
@@ -21,7 +21,7 @@ class Sidebar extends Component {
 const styles = StyleSheet.create({
     sideBar: {
         backgroundColor: 'rgba(33,77,100,.9)',
-        height: '100%',
+        height: '200vh',
         width: '10rem',
         position: 'absolute',
         size: 'auto',
