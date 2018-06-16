@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import Option from './Option';
 import EligibilityForm from './EligibilityForm';
 
+import Benefits from './Benefits';
+
 class Main extends Component {
     state = {
         clicked: false,
@@ -20,6 +22,7 @@ class Main extends Component {
                 {this.state.clicked ?
                     <EligibilityForm updateValue={this.updateValue}/> :
                     <Option text = "Determine your Eligibility" loadForm = {this.loadForm}/>}
+                    <Benefits data = {[true,true,false,true,false,false,false,true]} />
             </div>
             
         );
